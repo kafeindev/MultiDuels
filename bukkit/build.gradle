@@ -1,0 +1,30 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+dependencies {
+    implementation project(':common')
+
+    compileOnly 'io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT'
+}
+
+shadowJar {
+    archiveFileName = 'MultiDuels-' + project.version + '.jar'
+
+    relocate 'org.spongepowered.configurate', project.group + '.libs.configurate'
+    relocate 'io.leangen.geantyref', project.group + '.libs.geantyref'
+}
+
+processResources {
+    def props = [version: version]
+    inputs.properties props
+    expand props
+    filteringCharset 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand props
+    }
+}
+
+artifacts {
+    archives shadowJar
+}
