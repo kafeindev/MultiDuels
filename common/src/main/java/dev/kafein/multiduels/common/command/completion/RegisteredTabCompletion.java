@@ -22,53 +22,52 @@
  * SOFTWARE.
  */
 
-package dev.kafein.multiduels.common.command.misc;
+package dev.kafein.multiduels.common.command.completion;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
-import java.util.UUID;
 
-public final class Sender {
-    private final String name;
-    private final UUID uniqueId;
+public final class RegisteredTabCompletion {
+    private final int index;
+    private final TabCompletion tabCompletion;
 
-    public Sender(final @NotNull String name, final @NotNull UUID uniqueId) {
-        this.name = name;
-        this.uniqueId = uniqueId;
+    public RegisteredTabCompletion(final int index, final @NotNull TabCompletion tabCompletion) {
+        this.index = index;
+        this.tabCompletion = tabCompletion;
     }
 
-    public @NotNull String getName() {
-        return this.name;
+    public int getIndex() {
+        return this.index;
     }
 
-    public @NotNull UUID getUniqueId() {
-        return this.uniqueId;
+    public @NotNull TabCompletion getTabCompletion() {
+        return this.tabCompletion;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Sender)) {
+        if (!(obj instanceof RegisteredTabCompletion)) {
             return false;
         }
         if (obj == this) {
             return true;
         }
 
-        Sender sender = (Sender) obj;
-        return this.name.equals(sender.name) && this.uniqueId.equals(sender.uniqueId);
+        RegisteredTabCompletion other = (RegisteredTabCompletion) obj;
+        return this.index == other.index && this.tabCompletion.equals(other.tabCompletion);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.name, this.uniqueId);
+        return Objects.hash(this.index, this.tabCompletion);
     }
 
     @Override
     public String toString() {
-        return "Sender{" +
-                "name='" + this.name + '\'' +
-                ", uniqueId=" + this.uniqueId +
+        return "RegisteredTabCompletion{" +
+                "index=" + this.index +
+                ", name='" + this.tabCompletion + '\'' +
                 '}';
     }
 }

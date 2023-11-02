@@ -22,22 +22,13 @@
  * SOFTWARE.
  */
 
-package dev.kafein.multiduels.common.command;
+package dev.kafein.multiduels.common.command.completion;
 
-import org.jetbrains.annotations.NotNull;
+import dev.kafein.multiduels.common.command.CommandSender;
 
-public interface CommandRegistrar {
-    void registerCommand(final @NotNull Command command);
+import java.util.List;
+import java.util.function.Function;
 
-    default void registerCommands(final @NotNull Command... commands) {
-        for (final Command command : commands) {
-            registerCommand(command);
-        }
-    }
-
-    default void registerCommands(final @NotNull Iterable<Command> commands) {
-        for (final Command command : commands) {
-            registerCommand(command);
-        }
-    }
+@FunctionalInterface
+public interface TabCompletion extends Function<CommandSender, List<String>> {
 }

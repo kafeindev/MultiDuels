@@ -22,52 +22,79 @@
  * SOFTWARE.
  */
 
-package dev.kafein.multiduels.common.command.argument;
+package dev.kafein.multiduels.bukkit.command;
 
+import dev.kafein.multiduels.common.command.CommandSender;
+import dev.kafein.multiduels.common.components.PlayerComponent;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-public final class Argument {
-    private final int index;
-    private final String value;
+final class BukkitCommandSender implements CommandSender {
+    private final @NotNull org.bukkit.command.CommandSender sender;
 
-    public Argument(final int index, final @NotNull String value) {
-        this.index = index;
-        this.value = value;
+    BukkitCommandSender(final org.bukkit.command.@NotNull CommandSender sender) {
+        this.sender = sender;
     }
 
-    public int getIndex() {
-        return this.index;
+    @Override
+    public @NotNull String getName() {
+        return this.sender.getName();
     }
 
-    public @NotNull String getValue() {
-        return this.value;
+    @Override
+    public boolean isPlayer() {
+        return this.sender instanceof Player;
+    }
+
+    @Override
+    public void sendMessage(@NotNull String message) {
+
+    }
+
+    @Override
+    public void sendMessage(@NotNull String... messages) {
+
+    }
+
+    @Override
+    public void sendMessage(@NotNull Iterable<String> messages) {
+
+    }
+
+    @Override
+    public boolean hasPermission(@NotNull String permission) {
+        return false;
+    }
+
+    @Override
+    public PlayerComponent asPlayer() {
+        return null;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Argument)) {
+        if (!(obj instanceof CommandSender)) {
             return false;
         }
         if (obj == this) {
             return true;
         }
 
-        Argument other = (Argument) obj;
-        return this.index == other.index && this.value.equals(other.value);
+        CommandSender other = (CommandSender) obj;
+        return this.getName().equals(other.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.index, this.value);
+        return Objects.hash(this.getName());
     }
 
     @Override
     public String toString() {
-        return "Argument{" +
-                "index=" + this.index +
-                ", value='" + this.value + '\'' +
+        return "CommandSender{" +
+                "name='" + this.getName() + '\'' +
                 '}';
     }
 }

@@ -22,22 +22,12 @@
  * SOFTWARE.
  */
 
-package dev.kafein.multiduels.common.command;
+package dev.kafein.multiduels.common.command.context;
 
-import org.jetbrains.annotations.NotNull;
+import dev.kafein.multiduels.common.command.CommandSender;
 
-public interface CommandRegistrar {
-    void registerCommand(final @NotNull Command command);
+import java.util.function.BiFunction;
 
-    default void registerCommands(final @NotNull Command... commands) {
-        for (final Command command : commands) {
-            registerCommand(command);
-        }
-    }
-
-    default void registerCommands(final @NotNull Iterable<Command> commands) {
-        for (final Command command : commands) {
-            registerCommand(command);
-        }
-    }
+@FunctionalInterface
+public interface CommandContext<T> extends BiFunction<CommandSender, String, T> {
 }

@@ -22,53 +22,23 @@
  * SOFTWARE.
  */
 
-package dev.kafein.multiduels.common.command.argument;
+package dev.kafein.multiduels.common.command;
 
+import dev.kafein.multiduels.common.components.PlayerComponent;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.Set;
+public interface CommandSender {
+    @NotNull String getName();
 
-public final class Arguments {
-    private final Set<Argument> arguments;
+    boolean isPlayer();
 
-    public Arguments(final @NotNull Set<Argument> arguments) {
-        this.arguments = arguments;
-    }
+    void sendMessage(final @NotNull String message);
 
-    public @NotNull Set<Argument> getArguments() {
-        return this.arguments;
-    }
+    void sendMessage(final @NotNull String... messages);
 
-    public @Nullable Argument get(final int index) {
-        return this.arguments.stream()
-                .filter(argument -> argument.getIndex() == index)
-                .findFirst()
-                .orElse(null);
-    }
+    void sendMessage(final @NotNull Iterable<String> messages);
 
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof Arguments)) {
-            return false;
-        }
-        if (obj == this) {
-            return true;
-        }
+    boolean hasPermission(final @NotNull String permission);
 
-        Arguments other = (Arguments) obj;
-        return this.arguments.equals(other.arguments);
-    }
-
-    @Override
-    public int hashCode() {
-        return this.arguments.hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return "Arguments{" +
-                "arguments=" + this.arguments +
-                '}';
-    }
+    PlayerComponent asPlayer();
 }

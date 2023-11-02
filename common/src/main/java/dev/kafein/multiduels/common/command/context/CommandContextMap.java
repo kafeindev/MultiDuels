@@ -22,13 +22,39 @@
  * SOFTWARE.
  */
 
-package dev.kafein.multiduels.common.command;
+package dev.kafein.multiduels.common.command.context;
 
+import com.google.common.collect.Maps;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public abstract class AbstractParentCommand extends AbstractCommand
-        implements ParentCommand {
-    protected AbstractParentCommand(final @NotNull String name, final @NotNull String description, final @NotNull String usage) {
-        super(name, description, usage);
+import java.util.Map;
+
+public final class CommandContextMap {
+    private final Map<Class<?>, CommandContext<?>> commandContexts;
+
+    public CommandContextMap() {
+        this(Maps.newHashMap());
+    }
+
+    public CommandContextMap(final @NotNull Map<Class<?>, CommandContext<?>> commandContexts) {
+        this.commandContexts = commandContexts;
+    }
+
+    public @NotNull Map<Class<?>, CommandContext<?>> getCommandContexts() {
+        return this.commandContexts;
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> @Nullable CommandContext<T> getCommandContext(final @NotNull Class<T> clazz) {
+        return (CommandContext<T>) this.commandContexts.get(clazz);
+    }
+
+    public <T> void register(final @NotNull Class<T> clazz, final @NotNull CommandContext<T> commandContext) {
+        this.commandContexts.put(clazz, commandContext);
+    }
+
+    public <T> void unregister(final @NotNull Class<T> clazz) {
+        this.commandContexts.remove(clazz);
     }
 }

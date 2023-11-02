@@ -22,13 +22,38 @@
  * SOFTWARE.
  */
 
-package dev.kafein.multiduels.common.command;
+package dev.kafein.multiduels.common.command.completion;
 
+import com.google.common.collect.Maps;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-public abstract class AbstractChildCommand extends AbstractCommand
-        implements ChildCommand {
-    protected AbstractChildCommand(final @NotNull String name, final @NotNull String description, final @NotNull String usage) {
-        super(name, description, usage);
+import java.util.Map;
+
+public final class TabCompletionMap {
+    private final Map<String, TabCompletion> tabCompletions;
+
+    public TabCompletionMap() {
+        this(Maps.newHashMap());
+    }
+
+    public TabCompletionMap(final @NotNull Map<String, TabCompletion> tabCompletions) {
+        this.tabCompletions = tabCompletions;
+    }
+
+    public @NotNull Map<String, TabCompletion> getTabCompletions() {
+        return this.tabCompletions;
+    }
+
+    public @Nullable TabCompletion getTabCompletion(final @NotNull String key) {
+        return this.tabCompletions.get(key);
+    }
+
+    public void register(final @NotNull String key, final @NotNull TabCompletion tabCompletion) {
+        this.tabCompletions.put(key, tabCompletion);
+    }
+
+    public void unregister(final @NotNull String key) {
+        this.tabCompletions.remove(key);
     }
 }
