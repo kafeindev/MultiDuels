@@ -40,19 +40,19 @@ public final class CommandProperties {
     private final String usage;
     private final String permission;
 
-    public CommandProperties(final @NotNull String name, final @NotNull String description, final @NotNull String usage) {
+    public CommandProperties(String name, String description, String usage) {
         this(name, Lists.newArrayList(), description, usage, null);
     }
 
-    public CommandProperties(final @NotNull String name, final @NotNull String description, final @NotNull String usage, final @Nullable String permission) {
+    public CommandProperties(String name, String description, String usage, final @Nullable String permission) {
         this(name, Lists.newArrayList(), description, usage, permission);
     }
 
-    public CommandProperties(final @NotNull String name, final @NotNull List<String> aliases, final @NotNull String description, final @NotNull String usage) {
+    public CommandProperties(String name, List<String> aliases, String description, String usage) {
         this(name, aliases, description, usage, null);
     }
 
-    public CommandProperties(final @NotNull String name, final @NotNull List<String> aliases, final @NotNull String description, final @NotNull String usage, final @Nullable String permission) {
+    public CommandProperties(String name, List<String> aliases, String description, String usage, final @Nullable String permission) {
         this.name = name;
         this.aliases = aliases;
         this.description = description;
@@ -60,19 +60,19 @@ public final class CommandProperties {
         this.permission = permission;
     }
 
-    public @NotNull String getName() {
+    public String getName() {
         return this.name;
     }
 
-    public @NotNull List<String> getAliases() {
+    public List<String> getAliases() {
         return this.aliases;
     }
 
-    public @NotNull String getDescription() {
+    public String getDescription() {
         return this.description;
     }
 
-    public @NotNull String getUsage() {
+    public String getUsage() {
         return this.usage;
     }
 
@@ -125,32 +125,32 @@ public final class CommandProperties {
             this.aliases = Lists.newArrayList();
         }
 
-        public Builder name(final @NotNull String name) {
+        public Builder name(@NotNull String name) {
             this.name = name;
             return this;
         }
 
-        public Builder aliases(final @NotNull List<String> aliases) {
+        public Builder aliases(@NotNull List<String> aliases) {
             this.aliases = aliases;
             return this;
         }
 
-        public Builder alias(final @NotNull String alias) {
+        public Builder alias(@NotNull String alias) {
             this.aliases.add(alias);
             return this;
         }
 
-        public Builder description(final @NotNull String description) {
+        public Builder description(@NotNull String description) {
             this.description = description;
             return this;
         }
 
-        public Builder usage(final @NotNull String usage) {
+        public Builder usage(@NotNull String usage) {
             this.usage = usage;
             return this;
         }
 
-        public Builder permission(final @NotNull String permission) {
+        public Builder permission(@NotNull String permission) {
             this.permission = permission;
             return this;
         }

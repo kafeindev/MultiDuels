@@ -37,24 +37,24 @@ public final class CommandContextMap {
         this(Maps.newHashMap());
     }
 
-    public CommandContextMap(final @NotNull Map<Class<?>, CommandContext<?>> commandContexts) {
+    public CommandContextMap(@NotNull Map<Class<?>, CommandContext<?>> commandContexts) {
         this.commandContexts = commandContexts;
     }
 
-    public @NotNull Map<Class<?>, CommandContext<?>> getCommandContexts() {
+    public Map<Class<?>, CommandContext<?>> getCommandContexts() {
         return this.commandContexts;
     }
 
     @SuppressWarnings("unchecked")
-    public <T> @Nullable CommandContext<T> getCommandContext(final @NotNull Class<T> clazz) {
+    public <T> @Nullable CommandContext<T> getCommandContext(@NotNull Class<T> clazz) {
         return (CommandContext<T>) this.commandContexts.get(clazz);
     }
 
-    public <T> void register(final @NotNull Class<T> clazz, final @NotNull CommandContext<T> commandContext) {
+    public <T> void register(@NotNull Class<T> clazz, @NotNull CommandContext<T> commandContext) {
         this.commandContexts.put(clazz, commandContext);
     }
 
-    public <T> void unregister(final @NotNull Class<T> clazz) {
+    public <T> void unregister(@NotNull Class<T> clazz) {
         this.commandContexts.remove(clazz);
     }
 }

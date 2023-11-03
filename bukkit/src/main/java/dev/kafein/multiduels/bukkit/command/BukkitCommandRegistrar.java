@@ -41,13 +41,13 @@ public final class BukkitCommandRegistrar implements CommandRegistrar {
     private final String pluginName;
     private final CommandMap commandMap;
 
-    public BukkitCommandRegistrar(final @NotNull Plugin plugin) {
+    public BukkitCommandRegistrar(Plugin plugin) {
         this.pluginName = plugin.getName().toLowerCase(Locale.ENGLISH);
         this.commandMap = getCommandMapFromServer();
     }
 
     @Override
-    public void registerCommand(final @NotNull Command command) {
+    public void registerCommand(@NotNull Command command) {
         BukkitCommand bukkitCommand = new BukkitCommandAdapter(command);
         this.commandMap.register(this.pluginName, bukkitCommand);
     }

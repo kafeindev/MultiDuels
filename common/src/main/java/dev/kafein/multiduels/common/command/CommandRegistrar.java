@@ -27,15 +27,15 @@ package dev.kafein.multiduels.common.command;
 import org.jetbrains.annotations.NotNull;
 
 public interface CommandRegistrar {
-    void registerCommand(final @NotNull Command command);
+    void registerCommand(@NotNull Command command);
 
-    default void registerCommands(final @NotNull Command... commands) {
+    default void registerCommands(@NotNull Command... commands) {
         for (final Command command : commands) {
             registerCommand(command);
         }
     }
 
-    default void registerCommands(final @NotNull Iterable<Command> commands) {
+    default void registerCommands(@NotNull Iterable<Command> commands) {
         for (final Command command : commands) {
             registerCommand(command);
         }

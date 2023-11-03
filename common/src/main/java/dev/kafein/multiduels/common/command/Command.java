@@ -31,27 +31,27 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public interface Command {
-    @NotNull String getName();
+    String getName();
 
-    @NotNull List<String> getAliases();
+    List<String> getAliases();
 
-    boolean isAlias(final @NotNull String alias);
+    boolean isAlias(@NotNull String alias);
 
-    @NotNull String getDescription();
+    String getDescription();
 
-    @NotNull String getUsage();
+    String getUsage();
 
     @Nullable String getPermission();
 
-    @NotNull List<Command> getSubCommands();
+    List<Command> getSubCommands();
 
-    @NotNull Command findSubCommand(final @NotNull String sub);
+    Command findSubCommand(@NotNull String sub);
 
-    @NotNull Command findSubCommand(final @NotNull String... subs);
+    Command findSubCommand(@NotNull String... subs);
 
-    int findSubCommandIndex(final @NotNull String... subs);
+    int findSubCommandIndex(@NotNull String... subs);
 
-    @NotNull List<RegisteredTabCompletion> getTabCompletions();
+    List<RegisteredTabCompletion> getTabCompletions();
 
-    void execute(final @NotNull CommandSender sender, final @NotNull String[] args);
+    void execute(@NotNull CommandSender sender, @NotNull String[] args);
 }

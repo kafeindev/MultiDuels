@@ -24,15 +24,13 @@
 
 package dev.kafein.multiduels.common.command.completion;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Objects;
 
 public final class RegisteredTabCompletion {
     private final int index;
     private final TabCompletion tabCompletion;
 
-    public RegisteredTabCompletion(final int index, final @NotNull TabCompletion tabCompletion) {
+    public RegisteredTabCompletion(int index, TabCompletion tabCompletion) {
         this.index = index;
         this.tabCompletion = tabCompletion;
     }
@@ -41,7 +39,7 @@ public final class RegisteredTabCompletion {
         return this.index;
     }
 
-    public @NotNull TabCompletion getTabCompletion() {
+    public TabCompletion getTabCompletion() {
         return this.tabCompletion;
     }
 

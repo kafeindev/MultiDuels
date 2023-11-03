@@ -28,17 +28,17 @@ import dev.kafein.multiduels.common.components.PlayerComponent;
 import org.jetbrains.annotations.NotNull;
 
 public interface CommandSender {
-    @NotNull String getName();
+    String getName();
 
     boolean isPlayer();
 
-    void sendMessage(final @NotNull String message);
+    void sendMessage(@NotNull String message);
 
-    void sendMessage(final @NotNull String... messages);
+    void sendMessage(@NotNull String... messages);
 
-    void sendMessage(final @NotNull Iterable<String> messages);
+    void sendMessage(@NotNull Iterable<String> messages);
 
-    boolean hasPermission(final @NotNull String permission);
+    boolean hasPermission(@NotNull String permission);
 
     PlayerComponent asPlayer();
 }

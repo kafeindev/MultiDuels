@@ -38,7 +38,7 @@ import java.util.List;
 final class BukkitCommandAdapter extends BukkitCommand {
     private final Command command;
 
-    BukkitCommandAdapter(final @NotNull Command command) {
+    BukkitCommandAdapter(Command command) {
         super(command.getName(), command.getDescription(), command.getUsage(), command.getAliases());
         this.command = command;
     }

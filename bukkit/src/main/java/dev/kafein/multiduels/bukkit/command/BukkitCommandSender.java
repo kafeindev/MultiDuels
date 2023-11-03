@@ -32,20 +32,20 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 
 final class BukkitCommandSender implements CommandSender {
-    private final @NotNull org.bukkit.command.CommandSender sender;
+    private final org.bukkit.command.CommandSender sender;
 
-    BukkitCommandSender(final org.bukkit.command.@NotNull CommandSender sender) {
+    BukkitCommandSender(@NotNull org.bukkit.command.CommandSender sender) {
         this.sender = sender;
     }
 
     @Override
-    public @NotNull String getName() {
-        return this.sender.getName();
+    public String getName() {
+        return null;
     }
 
     @Override
     public boolean isPlayer() {
-        return this.sender instanceof Player;
+        return false;
     }
 
     @Override

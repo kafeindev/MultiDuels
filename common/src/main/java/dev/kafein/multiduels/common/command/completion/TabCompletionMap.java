@@ -37,23 +37,23 @@ public final class TabCompletionMap {
         this(Maps.newHashMap());
     }
 
-    public TabCompletionMap(final @NotNull Map<String, TabCompletion> tabCompletions) {
+    public TabCompletionMap(@NotNull Map<String, TabCompletion> tabCompletions) {
         this.tabCompletions = tabCompletions;
     }
 
-    public @NotNull Map<String, TabCompletion> getTabCompletions() {
+    public Map<String, TabCompletion> getTabCompletions() {
         return this.tabCompletions;
     }
 
-    public @Nullable TabCompletion getTabCompletion(final @NotNull String key) {
+    public @Nullable TabCompletion getTabCompletion(@NotNull String key) {
         return this.tabCompletions.get(key);
     }
 
-    public void register(final @NotNull String key, final @NotNull TabCompletion tabCompletion) {
+    public void register(@NotNull String key, @NotNull TabCompletion tabCompletion) {
         this.tabCompletions.put(key, tabCompletion);
     }
 
-    public void unregister(final @NotNull String key) {
+    public void unregister(@NotNull String key) {
         this.tabCompletions.remove(key);
     }
 }

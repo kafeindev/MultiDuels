@@ -36,45 +36,45 @@ public final class CommandManager {
     private final CommandContextMap commandContextMap;
     private final TabCompletionMap tabCompletionMap;
 
-    public CommandManager(final @NotNull CommandRegistrar commandRegistrar) {
+    public CommandManager(CommandRegistrar commandRegistrar) {
         this(commandRegistrar, new CommandContextMap(), new TabCompletionMap());
     }
 
-    public CommandManager(final @NotNull CommandRegistrar commandRegistrar, final @NotNull CommandContextMap commandContextMap, final @NotNull TabCompletionMap tabCompletionMap) {
+    public CommandManager(CommandRegistrar commandRegistrar, CommandContextMap commandContextMap, TabCompletionMap tabCompletionMap) {
         this.commandRegistrar = commandRegistrar;
         this.commandContextMap = commandContextMap;
         this.tabCompletionMap = tabCompletionMap;
     }
 
-    public @NotNull CommandRegistrar getCommandRegistrar() {
+    public CommandRegistrar getCommandRegistrar() {
         return this.commandRegistrar;
     }
 
-    public void registerCommand(final @NotNull Command command) {
+    public void registerCommand(@NotNull Command command) {
         this.commandRegistrar.registerCommand(command);
     }
 
-    public @NotNull CommandContextMap getCommandContextMap() {
+    public CommandContextMap getCommandContextMap() {
         return this.commandContextMap;
     }
 
-    public <T> @Nullable CommandContext<T> getCommandContext(final @NotNull Class<T> clazz) {
+    public <T> @Nullable CommandContext<T> getCommandContext(@NotNull Class<T> clazz) {
         return this.commandContextMap.getCommandContext(clazz);
     }
 
-    public <T> void registerCommandContext(final @NotNull Class<T> clazz, final @NotNull CommandContext<T> commandContext) {
+    public <T> void registerCommandContext(@NotNull Class<T> clazz, @NotNull CommandContext<T> commandContext) {
         this.commandContextMap.register(clazz, commandContext);
     }
 
-    public @NotNull TabCompletionMap getTabCompletionMap() {
+    public TabCompletionMap getTabCompletionMap() {
         return this.tabCompletionMap;
     }
 
-    public @Nullable TabCompletion getTabCompletion(final @NotNull String key) {
+    public @Nullable TabCompletion getTabCompletion(@NotNull String key) {
         return this.tabCompletionMap.getTabCompletion(key);
     }
 
-    public void registerTabCompletion(final @NotNull String key, final @NotNull TabCompletion tabCompletion) {
+    public void registerTabCompletion(@NotNull String key, @NotNull TabCompletion tabCompletion) {
         this.tabCompletionMap.register(key, tabCompletion);
     }
 }

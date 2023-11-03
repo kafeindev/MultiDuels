@@ -40,27 +40,27 @@ public abstract class AbstractCommand implements Command {
     private final List<Command> subCommands;
     private final List<RegisteredTabCompletion> tabCompletions;
 
-    public AbstractCommand(final @NotNull CommandProperties properties) {
+    public AbstractCommand(CommandProperties properties) {
         this(properties, ImmutableList.of());
     }
 
-    public AbstractCommand(final @NotNull CommandProperties properties, final @NotNull List<Command> subCommands) {
+    public AbstractCommand(CommandProperties properties, List<Command> subCommands) {
         this(properties, subCommands, ImmutableList.of());
     }
 
-    public AbstractCommand(final @NotNull CommandProperties properties, final @NotNull List<Command> subCommands, final @NotNull List<RegisteredTabCompletion> tabCompletions) {
+    public AbstractCommand(CommandProperties properties, List<Command> subCommands, List<RegisteredTabCompletion> tabCompletions) {
         this.properties = properties;
         this.subCommands = subCommands;
         this.tabCompletions = tabCompletions;
     }
 
     @Override
-    public @NotNull String getName() {
+    public String getName() {
         return this.properties.getName();
     }
 
     @Override
-    public @NotNull List<String> getAliases() {
+    public List<String> getAliases() {
         return this.properties.getAliases();
     }
 
@@ -70,12 +70,12 @@ public abstract class AbstractCommand implements Command {
     }
 
     @Override
-    public @NotNull String getDescription() {
+    public String getDescription() {
         return this.properties.getDescription();
     }
 
     @Override
-    public @NotNull String getUsage() {
+    public String getUsage() {
         return this.properties.getUsage();
     }
 
@@ -85,12 +85,12 @@ public abstract class AbstractCommand implements Command {
     }
 
     @Override
-    public @NotNull List<Command> getSubCommands() {
+    public List<Command> getSubCommands() {
         return this.subCommands;
     }
 
     @Override
-    public @NotNull Command findSubCommand(final @NotNull String sub) {
+    public Command findSubCommand(@NotNull String sub) {
         return this.subCommands.stream()
                 .filter(command -> command.isAlias(sub))
                 .findFirst()
@@ -98,7 +98,7 @@ public abstract class AbstractCommand implements Command {
     }
 
     @Override
-    public @NotNull Command findSubCommand(final @NotNull String... subs) {
+    public Command findSubCommand(@NotNull String... subs) {
         checkArgument(subs.length > 0, "Sub commands cannot be empty.");
 
         if (subs.length == 1) {
@@ -110,7 +110,7 @@ public abstract class AbstractCommand implements Command {
     }
 
     @Override
-    public int findSubCommandIndex(final @NotNull String... subs) {
+    public int findSubCommandIndex(@NotNull String... subs) {
         checkArgument(subs.length > 0, "Sub commands cannot be empty.");
 
         int index = 0;
@@ -128,7 +128,7 @@ public abstract class AbstractCommand implements Command {
     }
 
     @Override
-    public @NotNull List<RegisteredTabCompletion> getTabCompletions() {
+    public List<RegisteredTabCompletion> getTabCompletions() {
         return this.tabCompletions;
     }
 
