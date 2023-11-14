@@ -5,14 +5,34 @@ plugins {
 dependencies {
     implementation project(':common')
 
-    compileOnly 'io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT'
+    implementation('net.kyori:adventure-platform-bukkit:4.2.0') {
+        exclude(module: 'adventure-bom')
+        exclude(module: 'checker-qual')
+        exclude(module: 'annotations')
+    }
+
+    implementation 'com.github.cryptomorin:XSeries:9.7.0'
+
+    compileOnly 'com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT'
+    compileOnly 'com.mojang:authlib:1.5.25'
 }
 
 shadowJar {
     archiveFileName = 'MultiDuels-' + project.version + '.jar'
 
-    relocate 'org.spongepowered.configurate', project.group + '.libs.configurate'
-    relocate 'io.leangen.geantyref', project.group + '.libs.geantyref'
+    relocate 'ninja.leaping.configurate', project.group + '.libs.configurate'
+
+    relocate 'net.kyori', project.group + '.libs.kyori'
+
+    relocate 'com.mongodb', project.group + '.libs.mongodb'
+    relocate 'org.bson', project.group + '.libs.bson'
+
+    relocate 'com.zaxxer.hikari', project.group + '.libs.hikari'
+
+    relocate 'redis.clients.jedis', project.group + '.libs.jedis'
+    relocate 'org.apache.commons.pool2', project.group + '.libs.commons-pool2'
+
+    relocate 'com.cryptomorin.xseries', project.group + '.libs.xseries'
 }
 
 processResources {
