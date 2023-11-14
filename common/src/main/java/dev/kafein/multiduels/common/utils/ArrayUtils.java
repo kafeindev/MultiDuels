@@ -22,30 +22,39 @@
  * SOFTWARE.
  */
 
-package dev.kafein.multiduels.common.utils.reflect;
+package dev.kafein.multiduels.common.utils;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+@SuppressWarnings("unchecked")
+public final class ArrayUtils {
+    private ArrayUtils() {}
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
-public final class Methods {
-    private Methods() {}
-
-    public static void invoke(@NotNull Method method) {
-        invoke(method, (Object[]) null);
+    public static <T> T[] copyOf(T[] original, int newLength) {
+        T[] copy = (T[]) new Object[newLength];
+        System.arraycopy(original, 0, copy, 0, Math.min(original.length, newLength));
+        return copy;
     }
 
-    public static void invoke(@NotNull Method method, @Nullable Object... args) {
-        invoke(method, null, args);
+    public static <T> T[] copyOfRange(T[] original, int from, int to) {
+        T[] copy = (T[]) new Object[to - from];
+        System.arraycopy(original, from, copy, 0, Math.min(original.length - from, to - from));
+        return copy;
     }
 
-    public static void invoke(@NotNull Method method, @Nullable Object instance, @Nullable Object... args) {
-        try {
-            method.invoke(instance, args);
-        } catch (IllegalAccessException | InvocationTargetException e) {
-            throw new RuntimeException("Failed to invoke method", e);
+    public static <T> boolean contains(T[] array, T value) {
+        for (T element : array) {
+            if (element.equals(value)) {
+                return true;
+            }
         }
+        return false;
+    }
+
+    public static boolean contains(int[] array, int value) {
+        for (int element : array) {
+            if (element == value) {
+                return true;
+            }
+        }
+        return false;
     }
 }

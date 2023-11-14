@@ -22,30 +22,27 @@
  * SOFTWARE.
  */
 
-package dev.kafein.multiduels.common.utils.reflect;
+package dev.kafein.multiduels.common.utils;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import java.util.Map;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
-public final class Methods {
-    private Methods() {}
-
-    public static void invoke(@NotNull Method method) {
-        invoke(method, (Object[]) null);
+public final class Strings {
+    private Strings() {
     }
 
-    public static void invoke(@NotNull Method method, @Nullable Object... args) {
-        invoke(method, null, args);
-    }
-
-    public static void invoke(@NotNull Method method, @Nullable Object instance, @Nullable Object... args) {
-        try {
-            method.invoke(instance, args);
-        } catch (IllegalAccessException | InvocationTargetException e) {
-            throw new RuntimeException("Failed to invoke method", e);
+    public static String capitalize(String str) {
+        if (str == null || str.isEmpty()) {
+            return str;
         }
+
+        return str.substring(0, 1).toUpperCase() + str.substring(1);
+    }
+
+    public static String replace(String str, Map<String, String> replacements) {
+        for (Map.Entry<String, String> entry : replacements.entrySet()) {
+            str = str.replace(entry.getKey(), entry.getValue());
+        }
+
+        return str;
     }
 }
