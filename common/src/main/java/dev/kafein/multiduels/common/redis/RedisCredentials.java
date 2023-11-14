@@ -24,9 +24,9 @@
 
 package dev.kafein.multiduels.common.redis;
 
+import ninja.leaping.configurate.ConfigurationNode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.spongepowered.configurate.ConfigurationNode;
 import redis.clients.jedis.HostAndPort;
 
 public final class RedisCredentials {
@@ -50,10 +50,10 @@ public final class RedisCredentials {
     @NotNull
     public static RedisCredentials fromNode(@NotNull ConfigurationNode node) {
         return new RedisCredentials(
-                HostAndPort.from(node.node("host").getString()),
-                node.node("username").getString(),
-                node.node("password").getString(),
-                node.node("use-ssl").getBoolean()
+                HostAndPort.from(node.getNode("host").getString()),
+                node.getNode("username").getString(),
+                node.getNode("password").getString(),
+                node.getNode("use-ssl").getBoolean()
         );
     }
 
