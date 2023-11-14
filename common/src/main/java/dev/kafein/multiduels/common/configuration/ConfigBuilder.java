@@ -25,12 +25,12 @@
 package dev.kafein.multiduels.common.configuration;
 
 import dev.kafein.multiduels.common.utils.file.FileCreator;
+import ninja.leaping.configurate.ConfigurationOptions;
+import ninja.leaping.configurate.gson.GsonConfigurationLoader;
+import ninja.leaping.configurate.loader.ConfigurationLoader;
+import ninja.leaping.configurate.yaml.YAMLConfigurationLoader;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.UnknownNullability;
-import org.spongepowered.configurate.ConfigurateException;
-import org.spongepowered.configurate.ConfigurationNode;
-import org.spongepowered.configurate.ConfigurationOptions;
-import org.spongepowered.configurate.loader.ConfigurationLoader;
 
 import java.io.File;
 import java.io.IOException;
@@ -126,19 +126,27 @@ public final class ConfigBuilder {
         }
 
         try {
-            ConfigurationLoader<?> nodeLoader = this.type.createLoader()
-                    .path(this.path)
-                    .defaultOptions(this.options)
-                    .build();
-
-            ConfigurationNode node = nodeLoader.load();
-            if (node == null) {
-                throw new RuntimeException("Empty config");
-            }
-
-            return new Config(type, node, this.path);
-        } catch (ConfigurateException e) {
+            ConfigurationLoader<?> nodeLoader = createLoader();
+            return new Config(this.type, nodeLoader.load(), this.path);
+        } catch (IOException e) {
             throw new RuntimeException("Failed to create config", e);
+        }
+    }
+
+    private ConfigurationLoader<?> createLoader() {
+        switch (this.type) {
+            case JSON:
+                return GsonConfigurationLoader.builder()
+                        .setPath(this.path)
+                        .setDefaultOptions(this.options)
+                        .build();
+            case YAML:
+                return YAMLConfigurationLoader.builder()
+                        .setPath(this.path)
+                        .setDefaultOptions(this.options)
+                        .build();
+            default:
+                throw new IllegalStateException("Unexpected value: " + this);
         }
     }
 }

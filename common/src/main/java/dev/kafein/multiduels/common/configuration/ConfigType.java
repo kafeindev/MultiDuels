@@ -24,22 +24,7 @@
 
 package dev.kafein.multiduels.common.configuration;
 
-import org.spongepowered.configurate.gson.GsonConfigurationLoader;
-import org.spongepowered.configurate.loader.AbstractConfigurationLoader;
-import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
-
 public enum ConfigType {
     JSON,
     YAML;
-
-    public AbstractConfigurationLoader.Builder<?, ?> createLoader() {
-        switch (this) {
-            case JSON:
-                return GsonConfigurationLoader.builder();
-            case YAML:
-                return YamlConfigurationLoader.builder();
-            default:
-                throw new IllegalStateException("Unexpected value: " + this);
-        }
-    }
 }

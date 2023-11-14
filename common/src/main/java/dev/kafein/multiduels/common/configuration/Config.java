@@ -24,8 +24,8 @@
 
 package dev.kafein.multiduels.common.configuration;
 
+import ninja.leaping.configurate.ConfigurationNode;
 import org.jetbrains.annotations.Nullable;
-import org.spongepowered.configurate.ConfigurationNode;
 
 import java.nio.file.Path;
 import java.util.Objects;

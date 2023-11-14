@@ -24,12 +24,13 @@
 
 package dev.kafein.multiduels.common.configuration;
 
-import dev.kafein.multiduels.common.configuration.serializers.*;
+import com.google.common.reflect.TypeToken;
+import dev.kafein.multiduels.common.configuration.serializers.RedisCredentialsSerializer;
 import dev.kafein.multiduels.common.manager.AbstractManager;
 import dev.kafein.multiduels.common.redis.RedisCredentials;
+import ninja.leaping.configurate.ConfigurationNode;
+import ninja.leaping.configurate.ConfigurationOptions;
 import org.jetbrains.annotations.NotNull;
-import org.spongepowered.configurate.ConfigurationNode;
-import org.spongepowered.configurate.ConfigurationOptions;
 
 import java.io.InputStream;
 import java.lang.reflect.Field;
@@ -44,8 +45,8 @@ public final class ConfigManager extends AbstractManager<String, Config> {
         this.dataFolder = dataFolder;
         this.keyInjector = new KeyInjector();
         this.options = ConfigurationOptions.defaults()
-                .serializers(builder -> {
-                    builder.register(RedisCredentials.class, RedisCredentialsAdapter.INSTANCE);
+                .withSerializers(collection -> {
+                    collection.register(TypeToken.of(RedisCredentials.class), RedisCredentialsSerializer.INSTANCE);
                 });
     }
 

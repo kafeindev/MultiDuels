@@ -24,30 +24,30 @@
 
 package dev.kafein.multiduels.common.configuration.serializers;
 
-import org.checkerframework.checker.nullness.qual.Nullable;
+import com.google.common.reflect.TypeToken;
 import dev.kafein.multiduels.common.redis.RedisCredentials;
-import org.spongepowered.configurate.ConfigurationNode;
-import org.spongepowered.configurate.serialize.SerializationException;
-import org.spongepowered.configurate.serialize.TypeSerializer;
+import ninja.leaping.configurate.ConfigurationNode;
+import ninja.leaping.configurate.objectmapping.ObjectMappingException;
+import ninja.leaping.configurate.objectmapping.serialize.TypeSerializer;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
-import java.lang.reflect.Type;
+public final class RedisCredentialsSerializer implements TypeSerializer<RedisCredentials> {
+    public static final RedisCredentialsSerializer INSTANCE = new RedisCredentialsSerializer();
 
-public final class RedisCredentialsAdapter implements TypeSerializer<RedisCredentials> {
-    public static final RedisCredentialsAdapter INSTANCE = new RedisCredentialsAdapter();
-
-    private RedisCredentialsAdapter() {}
+    private RedisCredentialsSerializer() {}
 
     @Override
-    public RedisCredentials deserialize(Type type, ConfigurationNode node) throws SerializationException {
-        if (!node.isMap()) {
-            throw new SerializationException("Expected a map");
+    public @Nullable RedisCredentials deserialize(@NonNull TypeToken<?> type, @NonNull ConfigurationNode value) throws ObjectMappingException {
+        if (!value.isMap()) {
+            throw new ObjectMappingException("Expected a map");
         }
 
-        return RedisCredentials.fromNode(node);
+        return RedisCredentials.fromNode(value);
     }
 
     @Override
-    public void serialize(Type type, @Nullable RedisCredentials obj, ConfigurationNode node) throws SerializationException {
-        throw new SerializationException("Cannot serialize RedisCredentials");
+    public void serialize(@NonNull TypeToken<?> type, @Nullable RedisCredentials obj, @NonNull ConfigurationNode value) throws ObjectMappingException {
+        throw new ObjectMappingException("Cannot serialize RedisCredentials");
     }
 }

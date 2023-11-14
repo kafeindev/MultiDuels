@@ -24,10 +24,11 @@
 
 package dev.kafein.multiduels.common.configuration;
 
+import com.google.common.reflect.TypeToken;
 import dev.kafein.multiduels.common.utils.reflect.Fields;
+import ninja.leaping.configurate.ConfigurationNode;
+import ninja.leaping.configurate.objectmapping.ObjectMappingException;
 import org.jetbrains.annotations.NotNull;
-import org.spongepowered.configurate.ConfigurationNode;
-import org.spongepowered.configurate.serialize.SerializationException;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -59,13 +60,13 @@ final class KeyInjector {
             ConfigKey<?> key = (ConfigKey<?>) field.get(null);
             Class<?> type = key.getValue().getClass();
 
-            ConfigurationNode child = node.node(Arrays.asList(key.getPath()));
-            Object value = Collection.class.isAssignableFrom(type) ? child.raw() : child.get(type);
+            ConfigurationNode child = node.getNode(Arrays.asList(key.getPath()));
+            Object value = Collection.class.isAssignableFrom(type) ? child.getValue() : child.getValue(TypeToken.of(type));
 
             Fields.set(field, key, value, "value");
         } catch (IllegalAccessException e) {
             throw new RuntimeException("Failed to inject config key: " + field.getName(), e);
-        } catch (SerializationException e) {
+        } catch (ObjectMappingException e) {
             throw new RuntimeException("Failed to deserialize config key: " + field.getName(), e);
         }
     }

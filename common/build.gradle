@@ -1,0 +1,16 @@
+dependencies {
+    implementation('com.zaxxer:HikariCP:4.0.3') {
+        exclude(module: 'checker-qual')
+        exclude(module: 'annotations')
+        exclude(module: 'guava')
+        exclude(module: 'slf4j-api')
+    }
+
+    implementation 'org.mongodb:mongodb-driver-sync:4.10.2'
+
+    implementation('redis.clients:jedis:4.4.3') {
+        exclude(module: 'gson')
+        exclude(module: 'json')
+        exclude(module: 'slf4j-api')
+    }
+}
