@@ -23,14 +23,14 @@ subprojects {
         testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.1'
         testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.1'
 
-        implementation('org.spongepowered:configurate-yaml:4.1.2') {
+        implementation('org.spongepowered:configurate-yaml:3.7.2') {
             exclude(module: 'snakeyaml')
             exclude(module: 'checker-qual')
             exclude(module: 'annotations')
             exclude(module: 'guava')
             exclude(module: 'guice')
         }
-        implementation('org.spongepowered:configurate-gson:4.1.2') {
+        implementation('org.spongepowered:configurate-gson:3.7.2') {
             exclude(module: 'gson')
             exclude(module: 'checker-qual')
             exclude(module: 'annotations')
@@ -38,8 +38,18 @@ subprojects {
             exclude(module: 'guice')
         }
 
+        implementation('net.kyori:adventure-platform-api:4.2.0') {
+            exclude(module: 'adventure-bom')
+            exclude(module: 'checker-qual')
+            exclude(module: 'annotations')
+        }
+        implementation('net.kyori:adventure-text-minimessage:4.12.0') {
+            exclude(module: 'adventure-bom')
+            exclude(module: 'checker-qual')
+            exclude(module: 'annotations')
+        }
+
         compileOnly 'org.jetbrains:annotations:24.0.0'
-        compileOnly 'org.checkerframework:checker-qual:3.12.0'
 
         compileOnly 'com.google.guava:guava:32.1.1-jre'
         compileOnly 'com.google.code.gson:gson:2.8.0'
