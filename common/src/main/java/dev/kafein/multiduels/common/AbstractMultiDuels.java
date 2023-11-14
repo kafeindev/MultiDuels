@@ -24,6 +24,36 @@
 
 package dev.kafein.multiduels.common;
 
-public abstract class AbstractMultiDuels implements MultiDuels {
+import dev.kafein.multiduels.common.command.CommandManager;
+import dev.kafein.multiduels.common.command.CommandRegistrar;
+import dev.kafein.multiduels.common.menu.MenuManager;
+import org.jetbrains.annotations.NotNull;
 
+public abstract class AbstractMultiDuels implements MultiDuels {
+    private MenuManager menuManager;
+    private CommandManager commandManager;
+
+    @Override
+    public void load() {
+
+    }
+
+    @Override
+    public void enable() {
+        this.menuManager = new MenuManager();
+
+        this.commandManager = new CommandManager(getCommandRegistrar());
+    }
+
+    @Override
+    public void disable() {
+
+    }
+
+    protected abstract @NotNull CommandRegistrar getCommandRegistrar();
+
+    @Override
+    public MenuManager getMenuManager() {
+        return this.menuManager;
+    }
 }

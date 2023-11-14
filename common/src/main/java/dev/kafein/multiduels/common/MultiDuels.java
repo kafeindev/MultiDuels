@@ -24,6 +24,32 @@
 
 package dev.kafein.multiduels.common;
 
-public interface MultiDuels {
+import dev.kafein.multiduels.common.components.InventoryComponent;
+import dev.kafein.multiduels.common.components.ItemComponent;
+import dev.kafein.multiduels.common.components.PlayerComponent;
+import dev.kafein.multiduels.common.components.ServerComponent;
+import dev.kafein.multiduels.common.menu.MenuManager;
 
+public interface MultiDuels {
+    void load();
+
+    void enable();
+
+    void disable();
+
+    MenuManager getMenuManager();
+
+    ServerComponent.Factory getServerComponentFactory();
+
+    PlayerComponent.Wrapper<?> getPlayerComponentWrapper();
+
+    ItemComponent.Factory getItemComponentFactory();
+
+    ItemComponent.Wrapper<?> getItemComponentWrapper();
+
+    InventoryComponent.Factory getInventoryComponentFactory();
+
+    interface Wrapper<T> {
+        T wrap(MultiDuels plugin);
+    }
 }
