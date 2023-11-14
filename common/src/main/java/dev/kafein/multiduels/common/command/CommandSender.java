@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 public interface CommandSender {
     String getName();
 
-    boolean isPlayer();
+    boolean isConsole();
 
     void sendMessage(@NotNull String message);
 

@@ -37,7 +37,7 @@ public final class TabCompletionMap {
         this(Maps.newHashMap());
     }
 
-    public TabCompletionMap(@NotNull Map<String, TabCompletion> tabCompletions) {
+    public TabCompletionMap(Map<String, TabCompletion> tabCompletions) {
         this.tabCompletions = tabCompletions;
     }
 

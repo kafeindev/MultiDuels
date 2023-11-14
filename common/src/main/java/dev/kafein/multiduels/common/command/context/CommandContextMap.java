@@ -37,7 +37,7 @@ public final class CommandContextMap {
         this(Maps.newHashMap());
     }
 
-    public CommandContextMap(@NotNull Map<Class<?>, CommandContext<?>> commandContexts) {
+    public CommandContextMap(Map<Class<?>, CommandContext<?>> commandContexts) {
         this.commandContexts = commandContexts;
     }
 
