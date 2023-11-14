@@ -24,6 +24,7 @@
 
 package dev.kafein.multiduels.bukkit.command;
 
+import dev.kafein.multiduels.bukkit.components.BukkitPlayerComponent;
 import dev.kafein.multiduels.common.command.CommandSender;
 import dev.kafein.multiduels.common.components.PlayerComponent;
 import org.bukkit.entity.Player;
@@ -34,43 +35,47 @@ import java.util.Objects;
 final class BukkitCommandSender implements CommandSender {
     private final org.bukkit.command.CommandSender sender;
 
-    BukkitCommandSender(@NotNull org.bukkit.command.CommandSender sender) {
+    BukkitCommandSender(org.bukkit.command.CommandSender sender) {
         this.sender = sender;
     }
 
     @Override
     public String getName() {
-        return null;
+        return this.sender.getName();
     }
 
     @Override
-    public boolean isPlayer() {
-        return false;
+    public boolean isConsole() {
+        return !(this.sender instanceof Player);
     }
 
     @Override
     public void sendMessage(@NotNull String message) {
-
+        this.sender.sendMessage(message);
     }
 
     @Override
     public void sendMessage(@NotNull String... messages) {
-
+        for (String message : messages) {
+            this.sendMessage(message);
+        }
     }
 
     @Override
     public void sendMessage(@NotNull Iterable<String> messages) {
-
+        for (String message : messages) {
+            this.sendMessage(message);
+        }
     }
 
     @Override
     public boolean hasPermission(@NotNull String permission) {
-        return false;
+        return this.sender.hasPermission(permission);
     }
 
     @Override
     public PlayerComponent asPlayer() {
-        return null;
+        return new BukkitPlayerComponent((Player) this.sender);
     }
 
     @Override
