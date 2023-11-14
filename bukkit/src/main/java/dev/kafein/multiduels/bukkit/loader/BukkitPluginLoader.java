@@ -24,8 +24,29 @@
 
 package dev.kafein.multiduels.bukkit.loader;
 
+import dev.kafein.multiduels.bukkit.BukkitMultiDuels;
+import dev.kafein.multiduels.common.MultiDuels;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class BukkitPluginLoader extends JavaPlugin {
+    private final MultiDuels multiDuels;
 
+    public BukkitPluginLoader() {
+        this.multiDuels = new BukkitMultiDuels(this);
+    }
+
+    @Override
+    public void onLoad() {
+        this.multiDuels.load();
+    }
+
+    @Override
+    public void onEnable() {
+        this.multiDuels.enable();
+    }
+
+    @Override
+    public void onDisable() {
+        this.multiDuels.disable();
+    }
 }
