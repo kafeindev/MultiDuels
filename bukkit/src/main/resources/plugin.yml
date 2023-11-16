@@ -1,6 +1,6 @@
 name: MultiDuels
 version: ${version}
-authors: Kafein
+author: Kafein
 website: https://kafein.dev/
 main: dev.kafein.multiduels.bukkit.loader.BukkitPluginLoader
 api-version: 1.13
