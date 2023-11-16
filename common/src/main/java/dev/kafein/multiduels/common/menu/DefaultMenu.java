@@ -30,12 +30,12 @@ import dev.kafein.multiduels.common.menu.button.Button;
 
 import java.util.Set;
 
-final class MenuImpl extends AbstractMenu {
-    public MenuImpl(MenuProperties properties, InventoryComponent.Factory inventoryFactory, ItemComponent.Factory itemFactory) {
+final class DefaultMenu extends AbstractMenu {
+    public DefaultMenu(MenuProperties properties, InventoryComponent.Factory inventoryFactory, ItemComponent.Factory itemFactory) {
         super(properties, inventoryFactory, itemFactory);
     }
 
-    public MenuImpl(MenuProperties properties, InventoryComponent.Factory inventoryFactory, ItemComponent.Factory itemFactory, Set<Button> buttons) {
+    public DefaultMenu(MenuProperties properties, InventoryComponent.Factory inventoryFactory, ItemComponent.Factory itemFactory, Set<Button> buttons) {
         super(properties, inventoryFactory, itemFactory, buttons);
     }
 }

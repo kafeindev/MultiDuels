@@ -151,10 +151,9 @@ public final class MenuBuilder {
         MenuProperties properties = this.propertiesBuilder.build();
         checkNotNull(properties.getName(), "name");
         checkNotNull(properties.getTitle(), "title");
-        checkArgument(properties.getSize() > 0, "size must be greater than 0");
         checkNotNull(this.inventoryFactory, "inventoryFactory");
         checkNotNull(this.itemFactory, "itemFactory");
 
-        return new MenuImpl(properties, this.inventoryFactory, this.itemFactory, this.buttons);
+        return new DefaultMenu(properties, this.inventoryFactory, this.itemFactory, this.buttons);
     }
 }
