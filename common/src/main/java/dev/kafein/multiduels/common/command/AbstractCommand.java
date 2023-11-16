@@ -113,18 +113,12 @@ public abstract class AbstractCommand implements Command {
     public int findSubCommandIndex(@NotNull String... subs) {
         checkArgument(subs.length > 0, "Sub commands cannot be empty.");
 
-        int index = 0;
-        Command command = this;
-        while (index < subs.length) {
-            if (command.isAlias(subs[index])) {
-                command = command.findSubCommand(subs[index]);
-                index++;
-            } else {
-                break;
+        for (int i = 0; i < subs.length; i++) {
+            if (!this.isAlias(subs[i])) {
+                return i;
             }
         }
-
-        return index;
+        return subs.length;
     }
 
     @Override
