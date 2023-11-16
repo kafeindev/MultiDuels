@@ -24,16 +24,57 @@
 
 package dev.kafein.multiduels.common.menu;
 
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import dev.kafein.multiduels.common.components.PlayerComponent;
-import dev.kafein.multiduels.common.manager.AbstractManager;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 import java.util.UUID;
 
-public final class MenuManager extends AbstractManager<String, Menu> {
+public final class MenuManager {
+    private final Cache<String, Menu> menus;
+
+    public MenuManager() {
+        this.menus = CacheBuilder.newBuilder()
+                .build();
+    }
+
+    public Cache<String, Menu> getMenus() {
+        return this.menus;
+    }
+
+    public @Nullable Menu get(@NotNull String name) {
+        return this.menus.getIfPresent(name);
+    }
+
+    public Optional<Menu> find(@NotNull String name) {
+        return Optional.ofNullable(this.menus.getIfPresent(name));
+    }
+
+    public Optional<Menu> find(@NotNull Class<? extends Menu> menuClass) {
+        return this.menus.asMap().values().stream()
+                .filter(menuClass::isInstance)
+                .findFirst();
+    }
+
+    public Optional<Menu> findByViewer(@NotNull UUID uniqueId) {
+        return this.menus.asMap().values().stream()
+                .filter(menu -> menu.isViewing(uniqueId))
+                .findFirst();
+    }
+
+    public void register(@NotNull Menu menu) {
+        this.menus.put(menu.getName(), menu);
+    }
+
+    public void register(@NotNull Iterable<Menu> menus) {
+        menus.forEach(this::register);
+    }
+
     public void stopViewing() {
-        getValues().forEach(Menu::stopViewing);
+        this.menus.asMap().values().forEach(Menu::stopViewing);
     }
 
     public void stopViewing(@NotNull String name) {
@@ -50,25 +91,5 @@ public final class MenuManager extends AbstractManager<String, Menu> {
 
     public void stopViewing(@NotNull PlayerComponent player) {
         findByViewer(player.getUniqueId()).ifPresent(menu -> menu.close(player));
-    }
-
-    public Optional<Menu> find(@NotNull Class<? extends Menu> menuClass) {
-        return this.getValues().stream()
-                .filter(menuClass::isInstance)
-                .findFirst();
-    }
-
-    public Optional<Menu> findByViewer(@NotNull UUID uniqueId) {
-        return this.getValues().stream()
-                .filter(menu -> menu.isViewing(uniqueId))
-                .findFirst();
-    }
-
-    public void register(@NotNull Menu menu) {
-        put(menu.getName(), menu);
-    }
-
-    public void register(@NotNull Iterable<Menu> menus) {
-        menus.forEach(this::register);
     }
 }
